@@ -1,6 +1,4 @@
 use std::env;
-// --snip--
-
 use std::error::Error;
 use std::fs;
 
@@ -11,6 +9,7 @@ pub struct Config {
 }
 
 impl Config {
+    // comb the variables that are to be used, ignoring the first env variable, and also checking if case sensitive flag is true
     pub fn build(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
             return Err("not enough arguments");
@@ -29,6 +28,7 @@ impl Config {
     }
 }
 
+// performs the search
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
